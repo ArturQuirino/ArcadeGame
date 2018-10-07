@@ -69,6 +69,11 @@ Player.prototype.handleInput = function(keyCode){
 Player.prototype.checkIfWin = function() {
   if (this.y < 0) {
     this.moveToBeginning();
+    //Show you win message
+    document.getElementById("you-win").style.opacity = "1";
+    let youwinInterval = setTimeout(function() {
+      document.getElementById("you-win").style.opacity = "0";
+    },1000);
   }
 };
 
@@ -82,7 +87,7 @@ Player.prototype.moveToBeginning = function(){
 let allEnemies = [];
 
 //Create new enemy every 3 seconds.
-setInterval(createNewEnemy,3000);
+let enemyInterval = setInterval(createNewEnemy,3000);
 
 //create the first enemy
 createNewEnemy();

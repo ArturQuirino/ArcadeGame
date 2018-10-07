@@ -1,3 +1,18 @@
 body {
     text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+#you-win{
+  background-color: black;
+  border-radius: 10px;
+  color: white;
+  font-size: 120px;
+  position: absolute;
+  top: 200px;
+  transition: opacity 0.5s linear;
+  width: 505px;
+  margin: auto;
+  opacity: 0;
 }
