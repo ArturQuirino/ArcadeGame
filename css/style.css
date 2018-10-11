@@ -16,3 +16,11 @@ body {
   margin: auto;
   opacity: 0;
 }
+
+#score-container{
+  color: black;
+  font-family: "Helvetica";
+  font-size: 24px;
+  padding: 0 250px 0 0;
+  position: absolute;
+}

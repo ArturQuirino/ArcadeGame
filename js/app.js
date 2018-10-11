@@ -1,5 +1,7 @@
 'use strict';
 
+let baseSpeed = 30;
+
 // Enemies our player must avoid
 var Enemy = function(row, speed) {
     this.x = 0;
@@ -26,6 +28,7 @@ Enemy.prototype.render = function() {
 var Player = function() {
     this.x = 200;
     this.y = 400;
+    this.score = 0;
     this.sprite = 'images/char-boy.png';
 };
 
@@ -69,6 +72,9 @@ Player.prototype.handleInput = function(keyCode){
 Player.prototype.checkIfWin = function() {
   if (this.y < 0) {
     this.moveToBeginning();
+    this.score++;
+    baseSpeed += 10;
+    document.getElementById("score").innerHTML = this.score;
     //Show you win message
     document.getElementById("you-win").style.opacity = "1";
     let youwinInterval = setTimeout(function() {
@@ -92,15 +98,19 @@ let enemyInterval = setInterval(createNewEnemy,3000);
 //create the first enemy
 createNewEnemy();
 
+
+
 //create new enemy with random position and speed
 function createNewEnemy() {
-    const speed = Math.random()*70 + 30;
+    const speed = Math.random()*70 + baseSpeed;
     const row = Math.trunc(Math.random()*3);
     allEnemies.push(new Enemy(row, speed));
 };
 
 //create the player
 let player = new Player();
+
+document.getElementById("score").innerHTML = player.score;
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method.
