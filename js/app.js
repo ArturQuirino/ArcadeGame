@@ -1,6 +1,7 @@
 'use strict';
 
 let baseSpeed = 30;
+let timeBetweenEnemies = 3000;
 
 // Enemies our player must avoid
 var Enemy = function(row, speed) {
@@ -74,6 +75,10 @@ Player.prototype.checkIfWin = function() {
     this.moveToBeginning();
     this.score++;
     baseSpeed += 10;
+    clearInterval(enemyInterval);
+    timeBetweenEnemies -= 200;
+    createNewEnemy();
+    enemyInterval = setInterval(createNewEnemy,timeBetweenEnemies);
     document.getElementById("score").innerHTML = this.score;
     //Show you win message
     document.getElementById("you-win").style.opacity = "1";
@@ -93,7 +98,7 @@ Player.prototype.moveToBeginning = function(){
 let allEnemies = [];
 
 //Create new enemy every 3 seconds.
-let enemyInterval = setInterval(createNewEnemy,3000);
+let enemyInterval = setInterval(createNewEnemy,timeBetweenEnemies);
 
 //create the first enemy
 createNewEnemy();
