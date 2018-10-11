@@ -27,8 +27,8 @@ Enemy.prototype.render = function() {
 
 //Our Player
 var Player = function() {
-    this.x = 200;
-    this.y = 400;
+    this.x = 505;
+    this.y = 483;
     this.score = 0;
     this.sprite = 'images/char-boy.png';
 };
@@ -57,12 +57,12 @@ Player.prototype.handleInput = function(keyCode){
             this.checkIfWin();
             break;
         case 'right':
-            if(this.x < 400){
+            if(this.x < 900){
               this.x += 101;
             }
             break;
         case 'down':
-            if(this.y < 400) {
+            if(this.y < 460) {
               this.y += 83;
             }
             break;
@@ -76,7 +76,9 @@ Player.prototype.checkIfWin = function() {
     this.score++;
     baseSpeed += 10;
     clearInterval(enemyInterval);
-    timeBetweenEnemies -= 200;
+    if(timeBetweenEnemies > 200){
+      timeBetweenEnemies -= 200;
+    }
     createNewEnemy();
     enemyInterval = setInterval(createNewEnemy,timeBetweenEnemies);
     document.getElementById("score").innerHTML = this.score;
@@ -90,8 +92,8 @@ Player.prototype.checkIfWin = function() {
 
 //Move the player to the beginning
 Player.prototype.moveToBeginning = function(){
-  this.x = 200;
-  this.y = 400;
+  this.x = 505;
+  this.y = 483;
 };
 
 //List all enemies
@@ -108,7 +110,7 @@ createNewEnemy();
 //create new enemy with random position and speed
 function createNewEnemy() {
     const speed = Math.random()*70 + baseSpeed;
-    const row = Math.trunc(Math.random()*3);
+    const row = Math.trunc(Math.random()*4);
     allEnemies.push(new Enemy(row, speed));
 };
 
