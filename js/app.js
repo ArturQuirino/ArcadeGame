@@ -16,7 +16,8 @@ var Enemy = function(row, speed) {
 Enemy.prototype.update = function(dt) {
   this.x += this.speed*dt;
   if (this.x + 75 > player.x && this.x - 75 < player.x && this.y + 30 > player.y && this.y - 30 < player.y) {
-          player.moveToBeginning();
+      player.loosePoints();
+      player.moveToBeginning();
   }
 };
 
@@ -57,7 +58,7 @@ Player.prototype.handleInput = function(keyCode){
             this.checkIfWin();
             break;
         case 'right':
-            if(this.x < 900){
+            if(this.x < 1000){
               this.x += 101;
             }
             break;
@@ -73,11 +74,11 @@ Player.prototype.handleInput = function(keyCode){
 Player.prototype.checkIfWin = function() {
   if (this.y < 0) {
     this.moveToBeginning();
-    this.score++;
-    baseSpeed += 10;
+    this.score += 100;
+    baseSpeed += 15;
     clearInterval(enemyInterval);
-    if(timeBetweenEnemies > 200){
-      timeBetweenEnemies -= 200;
+    if(timeBetweenEnemies > 400){
+      timeBetweenEnemies -= 100;
     }
     createNewEnemy();
     enemyInterval = setInterval(createNewEnemy,timeBetweenEnemies);
@@ -86,7 +87,7 @@ Player.prototype.checkIfWin = function() {
     document.getElementById("you-win").style.opacity = "1";
     let youwinInterval = setTimeout(function() {
       document.getElementById("you-win").style.opacity = "0";
-    },1000);
+    },700);
   }
 };
 
@@ -95,6 +96,17 @@ Player.prototype.moveToBeginning = function(){
   this.x = 505;
   this.y = 483;
 };
+
+Player.prototype.loosePoints = function(){
+	baseSpeed -= 15;
+	timeBetweenEnemies += 100;
+	this.score -= 100;
+	document.getElementById("score").innerHTML = this.score;
+	document.getElementById("you-loose").style.opacity = "1";
+    let youwinInterval = setTimeout(function() {
+      document.getElementById("you-loose").style.opacity = "0";
+    },700);
+}
 
 //List all enemies
 let allEnemies = [];

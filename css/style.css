@@ -12,7 +12,7 @@ body {
   position: absolute;
   top: 200px;
   transition: opacity 0.5s linear;
-  width: 505px;
+  width: 800px;
   margin: auto;
   opacity: 0;
 }
