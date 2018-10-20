@@ -110,7 +110,7 @@ createNewEnemy();
 //create new enemy with random position and speed
 function createNewEnemy() {
     const speed = Math.random()*70 + baseSpeed;
-    const row = Math.trunc(Math.random()*4);
+    const row = Math.trunc(Math.random()*5);
     allEnemies.push(new Enemy(row, speed));
 };
 

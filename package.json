@@ -1,0 +1,25 @@
+{
+  "name": "frontend-nanodegree-arcade-game",
+  "version": "1.0.0",
+  "description": "frontend-nanodegree-arcade-game\r ===============================",
+  "main": "index.js",
+  "dependencies": {
+    "gulp": "^4.0.0"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.26.3"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ArturQuirino/ArcadeGame.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ArturQuirino/ArcadeGame/issues"
+  },
+  "homepage": "https://github.com/ArturQuirino/ArcadeGame#readme"
+}
