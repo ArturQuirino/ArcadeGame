@@ -36,7 +36,7 @@ const Player = function() {
 };
 
 // It is a method required by the game
-Player.prototype.update = function(){};
+Player.prototype.update = function() {};
 
 // Draw the player on the screen
 Player.prototype.render = function() {
@@ -82,7 +82,7 @@ Player.prototype.checkIfWin = function() {
       timeBetweenEnemies -= 100;
     }
     createNewEnemy();
-    enemyInterval = setInterval(createNewEnemy,timeBetweenEnemies);
+    enemyInterval = setInterval(createNewEnemy, timeBetweenEnemies);
     document.getElementById('score').innerHTML = this.score;
     // Show you win message
     document.getElementById('you-win').style.opacity = '1';
@@ -107,13 +107,13 @@ Player.prototype.loosePoints = function() {
   setTimeout(function() {
     document.getElementById('you-loose').style.opacity = '0';
   }, 700);
-}
+};
 
 // List all enemies
 const allEnemies = [];
 
 // Create new enemy every 3 seconds.
-let enemyInterval = setInterval(createNewEnemy,timeBetweenEnemies);
+let enemyInterval = setInterval(createNewEnemy, timeBetweenEnemies);
 
 // create the first enemy
 createNewEnemy();
@@ -127,7 +127,7 @@ function createNewEnemy() {
   const speed = Math.random()*70 + baseSpeed;
   const row = Math.trunc(Math.random()*5);
   allEnemies.push(new Enemy(row, speed));
-};
+}
 
 // create the player
 const player = new Player();

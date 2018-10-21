@@ -5,15 +5,25 @@ const gulp = require('gulp');
 // const autoprefixer = require('gulp-autoprefixer');
 const browserSync = require('browser-sync').create();
 const reload = browserSync.reload;
+const eslint = require('gulp-eslint');
 
-gulp.task('default', function() {
+gulp.task('lint', function() {
+  return gulp.src(['js/**/*.js'])
+      .pipe(eslint())
+      .pipe(eslint.format())
+      .pipe(eslint.failOnError());
+});
+
+const defaultFunction = function() {
   browserSync.init({
     server: './',
   });
-
+  console.log('teste');
   gulp.watch('**/*.*').on('change', reload);
-  console.log('default!');
-});
+  gulp.watch('js/**/*.js', gulp.series('lint'));
+};
+
+gulp.task('default', gulp.series('lint', defaultFunction));
 
 
 // gulp.task('styles', function() {
