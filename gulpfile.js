@@ -7,6 +7,7 @@ const browserSync = require('browser-sync').create();
 const reload = browserSync.reload;
 const eslint = require('gulp-eslint');
 const clean = require('gulp-clean');
+const concat = require('gulp-concat');
 
 gulp.task('lint', function() {
   return gulp.src(['js/**/*.js'])
@@ -36,7 +37,8 @@ gulp.task('copy-css', function() {
 });
 
 gulp.task('copy-js', function() {
-  return gulp.src('./js/*')
+  return gulp.src(['./js/resources.js', './js/engine.js', './js/app.js'])
+      .pipe(concat('all.js'))
       .pipe(gulp.dest('./dist/js'));
 });
 
@@ -48,7 +50,7 @@ gulp.task('copy-images', function() {
 gulp.task('delete-dist-folder', function() {
   return gulp.src('./dist', {read: false})
       .pipe(clean());
-})
+});
 
 gulp.task('copy-files',
     gulp.parallel('copy-html', 'copy-css', 'copy-js', 'copy-images'));
