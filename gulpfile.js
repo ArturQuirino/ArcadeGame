@@ -8,6 +8,8 @@ const reload = browserSync.reload;
 const eslint = require('gulp-eslint');
 const clean = require('gulp-clean');
 const concat = require('gulp-concat');
+const uglify = require('gulp-uglify');
+const babel = require('gulp-babel');
 
 gulp.task('lint', function() {
   return gulp.src(['js/**/*.js'])
@@ -37,8 +39,12 @@ gulp.task('copy-css', function() {
 });
 
 gulp.task('copy-js', function() {
-  return gulp.src(['./js/resources.js', './js/engine.js', './js/app.js'])
+  return gulp.src(['./js/engine.js', './js/resources.js', './js/app.js'])
       .pipe(concat('all.js'))
+      .pipe(babel({
+        presets: ['@babel/env'],
+      }))
+      .pipe(uglify())
       .pipe(gulp.dest('./dist/js'));
 });
 

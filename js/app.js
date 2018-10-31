@@ -1,5 +1,3 @@
-'use strict';
-
 let baseSpeed = 30;
 let timeBetweenEnemies = 3000;
 
