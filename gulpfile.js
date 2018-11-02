@@ -11,6 +11,8 @@ const concat = require('gulp-concat');
 const uglify = require('gulp-uglify');
 const babel = require('gulp-babel');
 const sourcemaps = require('gulp-sourcemaps');
+const imagemin = require('gulp-imagemin');
+const pngquant = require('imagemin-pngquant');
 
 gulp.task('lint', function() {
   return gulp.src(['js/**/*.js'])
@@ -53,6 +55,7 @@ gulp.task('copy-js', function() {
 
 gulp.task('copy-images', function() {
   return gulp.src('./images/*')
+      .pipe(imagemin([imagemin.optipng(), pngquant()]))
       .pipe(gulp.dest('./dist/images'));
 });
 
