@@ -18,8 +18,9 @@
     "eslint-config-google": "^0.11.0",
     "eslint-plugin-import": "^2.14.0",
     "gulp": "^4.0.0",
-    "gulp-babel": "^8.0.0",
+    "gulp-babel": "^8.0.0-beta.2",
     "gulp-clean": "^0.4.0",
+    "gulp-sourcemaps": "^2.6.4",
     "gulp-uglify": "^3.0.1"
   },
   "scripts": {
