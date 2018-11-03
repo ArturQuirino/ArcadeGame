@@ -180,6 +180,8 @@
     });
 
     player.render();
+
+    bonus.render();
   }
 
   /** This function does nothing but it could have been a good place to
@@ -200,7 +202,8 @@
     'images/water-block.png',
     'images/grass-block.png',
     'images/enemy-bug.png',
-    'images/char-boy.png',
+    'images/char-artur.png',
+    'images/bonus-coffee.png',
   ]);
   Resources.onReady(init);
 

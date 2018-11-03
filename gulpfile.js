@@ -26,7 +26,7 @@ const defaultFunction = function() {
     server: './dist',
   });
   gulp.watch('index.html', gulp.series('copy-html'));
-  gulp.watch('js/**/*.js', gulp.series('lint'));
+  gulp.watch('js/**/*.js', gulp.series('copy-js'));
   gulp.watch('css/*.css', gulp.series('copy-css'));
   gulp.watch('dist/**/*.*').on('change', reload);
 };
@@ -42,7 +42,13 @@ gulp.task('copy-css', function() {
 });
 
 gulp.task('copy-js', function() {
-  return gulp.src(['./js/resources.js', './js/engine.js', './js/app.js'])
+  return gulp.src([
+    './js/resources.js',
+    './js/engine.js',
+    './js/player.js',
+    './js/bonus.js',
+    './js/app.js',
+  ])
       .pipe(sourcemaps.init())
       .pipe(concat('all.js'))
       // .pipe(babel({
@@ -68,7 +74,7 @@ gulp.task('copy-files',
     gulp.parallel('copy-html', 'copy-css', 'copy-js', 'copy-images'));
 
 gulp.task('default',
-    gulp.series('lint', 'delete-dist-folder', 'copy-files', defaultFunction));
+    gulp.series('delete-dist-folder', 'copy-files', defaultFunction));
 
 
 // gulp.task('styles', function() {

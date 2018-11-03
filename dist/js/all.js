@@ -293,6 +293,8 @@
     });
 
     player.render();
+
+    bonus.render();
   }
 
   /** This function does nothing but it could have been a good place to
@@ -313,7 +315,8 @@
     'images/water-block.png',
     'images/grass-block.png',
     'images/enemy-bug.png',
-    'images/char-boy.png',
+    'images/char-artur.png',
+    'images/bonus-coffee.png',
   ]);
   Resources.onReady(init);
 
@@ -324,39 +327,17 @@
   global.ctx = ctx;
 })(this);
 
-let baseSpeed = 30;
-let timeBetweenEnemies = 3000;
-
-// Enemies our player must avoid
-const Enemy = function(row, speed) {
-  this.x = 0;
-  this.y = 60 + row*80;
-  this.speed = speed;
-  this.sprite = 'images/enemy-bug.png';
-};
-
-// Update the enemy's position
-// Parameter: dt, a time delta between ticks
-Enemy.prototype.update = function(dt) {
-  this.x += this.speed*dt;
-  if (this.x + 75 > player.x && this.x - 75 < player.x
-		&& this.y + 30 > player.y && this.y - 30 < player.y) {
-    player.loosePoints();
-    player.moveToBeginning();
-  }
-};
-
-// Draw the enemy on the screen
-Enemy.prototype.render = function() {
-  ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+const initialPosition = {
+  x: 475,
+  y: 20 + 5*80,
 };
 
 // Our Player
 const Player = function() {
-  this.x = 505;
-  this.y = 483;
+  this.x = initialPosition.x;
+  this.y = initialPosition.y;
   this.score = 0;
-  this.sprite = 'images/char-boy.png';
+  this.sprite = 'images/char-artur.png';
 };
 
 // It is a method required by the game
@@ -388,7 +369,7 @@ Player.prototype.handleInput = function(keyCode) {
       }
       break;
     case 'down':
-      if (this.y < 460) {
+      if (this.y < 420) {
         this.y += 83;
       }
       break;
@@ -400,7 +381,7 @@ Player.prototype.checkIfWin = function() {
   if (this.y < 0) {
     this.moveToBeginning();
     this.score += 100;
-    baseSpeed += 15;
+    rangeSpeed += 10;
     clearInterval(enemyInterval);
     if (timeBetweenEnemies > 400) {
       timeBetweenEnemies -= 100;
@@ -418,12 +399,12 @@ Player.prototype.checkIfWin = function() {
 
 // Move the player to the beginning
 Player.prototype.moveToBeginning = function() {
-  this.x = 505;
-  this.y = 483;
+  this.x = initialPosition.x;
+  this.y = initialPosition.y;
 };
 
 Player.prototype.loosePoints = function() {
-  baseSpeed -= 15;
+  rangeSpeed -= 10;
   timeBetweenEnemies += 100;
   this.score -= 100;
   document.getElementById('score').innerHTML = this.score;
@@ -432,10 +413,55 @@ Player.prototype.loosePoints = function() {
     document.getElementById('you-loose').style.opacity = '0';
   }, 700);
 };
+/* exported Bonus */
+class Bonus {
+  constructor() {
+    this.column = Math.trunc(Math.random() * 11);
+    this.row = Math.trunc(Math.random() * 5);
+    this.x = 50 + this.column * 101;
+    this.y = 60 + this.row * 80;
+    this.image = 'images/bonus-coffee.png';
+  }
+
+  render() {
+    ctx.drawImage(Resources.get(this.image), this.x, this.y);
+  }
+}
+
+const baseSpeed = 30;
+/* exported rangeSpeed timeBetweenEnemies */
+let rangeSpeed = 70;
+let timeBetweenEnemies = 3000;
+
+// Enemies our player must avoid
+const Enemy = function(row, speed) {
+  this.x = 0;
+  this.y = 60 + row*80;
+  this.speed = speed;
+  this.sprite = 'images/enemy-bug.png';
+};
+
+// Update the enemy's position
+// Parameter: dt, a time delta between ticks
+Enemy.prototype.update = function(dt) {
+  this.x += this.speed*dt;
+  if (this.x + 75 > player.x && this.x - 75 < player.x
+		&& this.y + 30 > player.y + 40 && this.y - 30 < player.y + 40) {
+    player.loosePoints();
+    player.moveToBeginning();
+  }
+};
+
+// Draw the enemy on the screen
+Enemy.prototype.render = function() {
+  ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+};
+
 
 // List all enemies
 const allEnemies = [];
 
+/* exported enemyInterval */
 // Create new enemy every 3 seconds.
 let enemyInterval = setInterval(createNewEnemy, timeBetweenEnemies);
 
@@ -448,13 +474,16 @@ createNewEnemy();
  * @return {void}
  */
 function createNewEnemy() {
-  const speed = Math.random()*70 + baseSpeed;
+  const speed = Math.random()*rangeSpeed + baseSpeed;
   const row = Math.trunc(Math.random()*5);
   allEnemies.push(new Enemy(row, speed));
 }
 
 // create the player
 const player = new Player();
+
+/* exported bonus */
+let bonus = new Bonus();
 
 document.getElementById('score').innerHTML = player.score;
 
