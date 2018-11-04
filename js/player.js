@@ -1,6 +1,6 @@
 const initialPosition = {
-    x: 475,
-    y: 20 + 5*80,
+    x: 515,
+    y: 100 + 5*80,
 };
 
 // Our Player
@@ -53,7 +53,7 @@ Player.prototype.handleInput = function(keyCode) {
 
 // Check if the player is in the toppest place of the game
 Player.prototype.checkIfWin = function() {
-    if (this.y < 0) {
+    if (this.y < 50) {
         this.moveToBeginning();
         this.score += 100;
         rangeSpeed += 10;

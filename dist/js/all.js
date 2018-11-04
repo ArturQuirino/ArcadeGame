@@ -328,8 +328,8 @@
 })(this);
 
 const initialPosition = {
-    x: 475,
-    y: 20 + 5*80,
+    x: 515,
+    y: 100 + 5*80,
 };
 
 // Our Player
@@ -382,7 +382,7 @@ Player.prototype.handleInput = function(keyCode) {
 
 // Check if the player is in the toppest place of the game
 Player.prototype.checkIfWin = function() {
-    if (this.y < 0) {
+    if (this.y < 50) {
         this.moveToBeginning();
         this.score += 100;
         rangeSpeed += 10;
@@ -455,9 +455,9 @@ class Bonus {
 
     generateNewPosition() {
         this.column = Math.trunc(Math.random() * 10);
-        this.row = Math.trunc(Math.random() * 4);
-        this.x = 50 + this.column * 101;
-        this.y = this.row * 80;
+        this.row = Math.trunc(Math.random() * 5);
+        this.x = 15 + this.column * 101;
+        this.y = 85 + this.row * 80;
     }
 }
 
@@ -478,8 +478,8 @@ const Enemy = function(row, speed) {
 // Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
     this.x += this.speed*dt;
-    if (this.x + 75 > player.x && this.x - 75 < player.x
-		&& this.y + 30 > player.y + 40 && this.y - 30 < player.y + 40) {
+    if (this.x + 75 > player.x && this.x - 45 < player.x
+		&& this.y + 40 > player.y && this.y - 40 < player.y) {
         player.loosePoints();
         player.moveToBeginning();
     }

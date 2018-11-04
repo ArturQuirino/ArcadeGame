@@ -15,8 +15,8 @@ const Enemy = function(row, speed) {
 // Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
     this.x += this.speed*dt;
-    if (this.x + 75 > player.x && this.x - 75 < player.x
-		&& this.y + 30 > player.y + 40 && this.y - 30 < player.y + 40) {
+    if (this.x + 75 > player.x && this.x - 45 < player.x
+		&& this.y + 40 > player.y && this.y - 40 < player.y) {
         player.loosePoints();
         player.moveToBeginning();
     }

@@ -16,8 +16,8 @@ class Bonus {
 
     generateNewPosition() {
         this.column = Math.trunc(Math.random() * 10);
-        this.row = Math.trunc(Math.random() * 4);
-        this.x = 50 + this.column * 101;
-        this.y = this.row * 80;
+        this.row = Math.trunc(Math.random() * 5);
+        this.x = 15 + this.column * 101;
+        this.y = 85 + this.row * 80;
     }
 }
