@@ -6,6 +6,7 @@ module.exports = {
       },
     "rules":{
         "no-tabs": 0,
+        "indent": ["error", 4],
         "require-jsdoc": ["error", {
             "require": {
                 "FunctionDeclaration": false,
