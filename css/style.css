@@ -8,11 +8,11 @@ body {
   background-color: black;
   border-radius: 10px;
   color: white;
-  font-size: 120px;
+  font-size: 80px;
   position: absolute;
   top: 200px;
   transition: opacity 0.5s linear;
-  width: 800px;
+  width: 600px;
   margin: auto;
   opacity: 0;
 }
@@ -23,4 +23,8 @@ body {
   font-size: 24px;
   padding: 0 250px 0 0;
   position: absolute;
+}
+
+#you-win-bonus{
+    transition: opacity 0.5s linear;
 }

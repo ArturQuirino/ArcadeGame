@@ -394,10 +394,7 @@ Player.prototype.checkIfWin = function() {
         enemyInterval = setInterval(createNewEnemy, timeBetweenEnemies);
         refreshScore();
         // Show you win message
-        document.getElementById('you-win').style.opacity = '1';
-        setTimeout(function() {
-            document.getElementById('you-win').style.opacity = '0';
-        }, 700);
+        showPanel(700, 'you-win');
     }
 };
 
@@ -412,18 +409,15 @@ Player.prototype.loosePoints = function() {
     timeBetweenEnemies += 100;
     this.score -= 100;
     refreshScore();
-    document.getElementById('you-loose').style.opacity = '1';
-    setTimeout(function() {
-        document.getElementById('you-loose').style.opacity = '0';
-    }, 700);
+    showPanel(700, 'you-loose');
 };
 
 Player.prototype.checkBonus = function() {
-    debugger;
     if (bonus.x + 75 > player.x && bonus.x - 75 < player.x
 		&& bonus.y + 40 > player.y + 20 && bonus.y - 40 < player.y + 20) {
         this.score += 50;
         refreshScore();
+        showPanel(400, 'you-win-bonus');
         bonus.moveAround();
     }
 };
@@ -432,6 +426,14 @@ Player.prototype.checkBonus = function() {
 function refreshScore() {
     document.getElementById('score').innerHTML = player.score;
 };
+
+function showPanel(timeStamp, cssClass) {
+    document.getElementById(cssClass).style.opacity = '1';
+    setTimeout(function() {
+        document.getElementById(cssClass).style.opacity = '0';
+    }, timeStamp);
+};
+
 
 /* exported Bonus */
 class Bonus {
