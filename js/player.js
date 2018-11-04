@@ -87,6 +87,8 @@ Player.prototype.checkBonus = function() {
     if (bonus.x + 75 > player.x && bonus.x - 75 < player.x
 		&& bonus.y + 40 > player.y + 20 && bonus.y - 40 < player.y + 20) {
         this.score += 50;
+        rangeSpeed += 4;
+        timeBetweenEnemies -= 40;
         refreshScore();
         showPanel(400, 'you-win-bonus');
         bonus.moveAround();
