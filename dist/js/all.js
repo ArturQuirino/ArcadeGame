@@ -238,7 +238,7 @@
          * for that particular row of the game level.
          */
         const rowImages = [
-            'images/water-block.png', // Top row is water
+            'images/stone-block.png', // Row 3 of 3 of stone
             'images/stone-block.png', // Row 1 of 3 of stone
             'images/stone-block.png', // Row 2 of 3 of stone
             'images/stone-block.png', // Row 3 of 3 of stone
@@ -359,11 +359,10 @@ Player.prototype.handleInput = function(keyCode) {
         break;
     case 'up':
         // if it is moving up, it shoudl check if it is the winning spot.
-        if (this.y > 0) {
+        if (this.y > 84) {
             this.y -= 83;
             this.checkBonus();
         }
-        this.checkIfWin();
         break;
     case 'right':
         if (this.x < 1000) {
@@ -377,24 +376,6 @@ Player.prototype.handleInput = function(keyCode) {
             this.checkBonus();
         }
         break;
-    }
-};
-
-// Check if the player is in the toppest place of the game
-Player.prototype.checkIfWin = function() {
-    if (this.y < 50) {
-        this.moveToBeginning();
-        this.score += 100;
-        rangeSpeed += 10;
-        clearInterval(enemyInterval);
-        if (timeBetweenEnemies > 400) {
-            timeBetweenEnemies -= 100;
-        }
-        createNewEnemy();
-        enemyInterval = setInterval(createNewEnemy, timeBetweenEnemies);
-        refreshScore();
-        // Show you win message
-        showPanel(700, 'you-win');
     }
 };
 
@@ -415,12 +396,17 @@ Player.prototype.loosePoints = function() {
 Player.prototype.checkBonus = function() {
     if (bonus.x + 75 > player.x && bonus.x - 75 < player.x
 		&& bonus.y + 40 > player.y + 20 && bonus.y - 40 < player.y + 20) {
-        this.score += 50;
-        rangeSpeed += 4;
-        timeBetweenEnemies -= 40;
+        this.score += 100;
+        rangeSpeed += 10;
+        clearInterval(enemyInterval);
+        if (timeBetweenEnemies > 400) {
+            timeBetweenEnemies -= 100;
+        }
+        enemyInterval = setInterval(createNewEnemy, timeBetweenEnemies);
         refreshScore();
         showPanel(400, 'you-win-bonus');
         bonus.moveAround();
+        createNewEnemy();
     }
 };
 
@@ -458,7 +444,7 @@ class Bonus {
         while (newRow == this.row) {
             newRow = Math.trunc(Math.random() * 5);
         }
-        this.column = Math.trunc(Math.random() * 10);
+        this.column = Math.trunc(Math.random() * 9) + 1;
         this.row = newRow;
         this.x = 15 + this.column * 101;
         this.y = 85 + this.row * 80;
@@ -473,7 +459,7 @@ let timeBetweenEnemies = 3000;
 // Enemies our player must avoid
 const Enemy = function(row, speed) {
     this.x = 0;
-    this.y = 60 + row*80;
+    this.y = row*80 - 20;
     this.speed = speed;
     this.sprite = 'images/enemy-bug.png';
 };
@@ -512,7 +498,7 @@ createNewEnemy();
  */
 function createNewEnemy() {
     const speed = Math.random()*rangeSpeed + baseSpeed;
-    const row = Math.trunc(Math.random()*5);
+    const row = Math.trunc(Math.random()*6);
     allEnemies.push(new Enemy(row, speed));
 }
 

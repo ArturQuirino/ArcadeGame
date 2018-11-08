@@ -30,11 +30,10 @@ Player.prototype.handleInput = function(keyCode) {
         break;
     case 'up':
         // if it is moving up, it shoudl check if it is the winning spot.
-        if (this.y > 0) {
+        if (this.y > 84) {
             this.y -= 83;
             this.checkBonus();
         }
-        this.checkIfWin();
         break;
     case 'right':
         if (this.x < 1000) {
@@ -48,24 +47,6 @@ Player.prototype.handleInput = function(keyCode) {
             this.checkBonus();
         }
         break;
-    }
-};
-
-// Check if the player is in the toppest place of the game
-Player.prototype.checkIfWin = function() {
-    if (this.y < 50) {
-        this.moveToBeginning();
-        this.score += 100;
-        rangeSpeed += 10;
-        clearInterval(enemyInterval);
-        if (timeBetweenEnemies > 400) {
-            timeBetweenEnemies -= 100;
-        }
-        createNewEnemy();
-        enemyInterval = setInterval(createNewEnemy, timeBetweenEnemies);
-        refreshScore();
-        // Show you win message
-        showPanel(700, 'you-win');
     }
 };
 
@@ -86,12 +67,17 @@ Player.prototype.loosePoints = function() {
 Player.prototype.checkBonus = function() {
     if (bonus.x + 75 > player.x && bonus.x - 75 < player.x
 		&& bonus.y + 40 > player.y + 20 && bonus.y - 40 < player.y + 20) {
-        this.score += 50;
-        rangeSpeed += 4;
-        timeBetweenEnemies -= 40;
+        this.score += 100;
+        rangeSpeed += 10;
+        clearInterval(enemyInterval);
+        if (timeBetweenEnemies > 400) {
+            timeBetweenEnemies -= 100;
+        }
+        enemyInterval = setInterval(createNewEnemy, timeBetweenEnemies);
         refreshScore();
         showPanel(400, 'you-win-bonus');
         bonus.moveAround();
+        createNewEnemy();
     }
 };
 

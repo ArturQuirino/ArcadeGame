@@ -125,7 +125,7 @@
          * for that particular row of the game level.
          */
         const rowImages = [
-            'images/water-block.png', // Top row is water
+            'images/stone-block.png', // Row 3 of 3 of stone
             'images/stone-block.png', // Row 1 of 3 of stone
             'images/stone-block.png', // Row 2 of 3 of stone
             'images/stone-block.png', // Row 3 of 3 of stone

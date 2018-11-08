@@ -6,7 +6,7 @@ let timeBetweenEnemies = 3000;
 // Enemies our player must avoid
 const Enemy = function(row, speed) {
     this.x = 0;
-    this.y = 60 + row*80;
+    this.y = row*80 - 20;
     this.speed = speed;
     this.sprite = 'images/enemy-bug.png';
 };
@@ -45,7 +45,7 @@ createNewEnemy();
  */
 function createNewEnemy() {
     const speed = Math.random()*rangeSpeed + baseSpeed;
-    const row = Math.trunc(Math.random()*5);
+    const row = Math.trunc(Math.random()*6);
     allEnemies.push(new Enemy(row, speed));
 }
 
