@@ -59,7 +59,7 @@ Player.prototype.moveToBeginning = function() {
 Player.prototype.loosePoints = function() {
     rangeSpeed -= 10;
     timeBetweenEnemies += 100;
-    this.score -= 100;
+    this.score -= 1;
     refreshScore();
     showPanel(700, 'you-loose');
 };
@@ -67,7 +67,7 @@ Player.prototype.loosePoints = function() {
 Player.prototype.checkBonus = function() {
     if (bonus.x + 75 > player.x && bonus.x - 75 < player.x
 		&& bonus.y + 40 > player.y + 20 && bonus.y - 40 < player.y + 20) {
-        this.score += 100;
+        this.score += 1;
         rangeSpeed += 10;
         clearInterval(enemyInterval);
         if (timeBetweenEnemies > 400) {

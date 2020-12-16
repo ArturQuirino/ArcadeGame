@@ -2,7 +2,7 @@
 class Bonus {
     constructor() {
         this.generateNewPosition();
-        this.image = 'images/bonus-coffee.png';
+        this.image = 'images/bonus-gift.png';
     }
 
     render() {
@@ -21,7 +21,7 @@ class Bonus {
         }
         this.column = Math.trunc(Math.random() * 9) + 1;
         this.row = newRow;
-        this.x = 15 + this.column * 101;
-        this.y = 85 + this.row * 80;
+        this.x = 5 + this.column * 101;
+        this.y = 110 + this.row * 80;
     }
 }

@@ -203,7 +203,7 @@
         'images/grass-block.png',
         'images/enemy-bug.png',
         'images/char-artur.png',
-        'images/bonus-coffee.png',
+        'images/bonus-gift.png',
     ]);
     Resources.onReady(init);
 

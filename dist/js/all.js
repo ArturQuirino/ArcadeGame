@@ -316,7 +316,7 @@
         'images/grass-block.png',
         'images/enemy-bug.png',
         'images/char-artur.png',
-        'images/bonus-coffee.png',
+        'images/bonus-gift.png',
     ]);
     Resources.onReady(init);
 
@@ -388,7 +388,7 @@ Player.prototype.moveToBeginning = function() {
 Player.prototype.loosePoints = function() {
     rangeSpeed -= 10;
     timeBetweenEnemies += 100;
-    this.score -= 100;
+    this.score -= 1;
     refreshScore();
     showPanel(700, 'you-loose');
 };
@@ -396,7 +396,7 @@ Player.prototype.loosePoints = function() {
 Player.prototype.checkBonus = function() {
     if (bonus.x + 75 > player.x && bonus.x - 75 < player.x
 		&& bonus.y + 40 > player.y + 20 && bonus.y - 40 < player.y + 20) {
-        this.score += 100;
+        this.score += 1;
         rangeSpeed += 10;
         clearInterval(enemyInterval);
         if (timeBetweenEnemies > 400) {
@@ -427,7 +427,7 @@ function showPanel(timeStamp, cssClass) {
 class Bonus {
     constructor() {
         this.generateNewPosition();
-        this.image = 'images/bonus-coffee.png';
+        this.image = 'images/bonus-gift.png';
     }
 
     render() {
@@ -446,8 +446,8 @@ class Bonus {
         }
         this.column = Math.trunc(Math.random() * 9) + 1;
         this.row = newRow;
-        this.x = 15 + this.column * 101;
-        this.y = 85 + this.row * 80;
+        this.x = 5 + this.column * 101;
+        this.y = 110 + this.row * 80;
     }
 }
 
