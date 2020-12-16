@@ -2,6 +2,7 @@ body {
     text-align: center;
     display: flex;
     justify-content: center;
+    background-color: #8b0000;
 }
 
 .panel{
@@ -18,7 +19,7 @@ body {
 }
 
 #score-container{
-  color: black;
+  color: #FAFAFA;
   font-family: "Helvetica";
   font-size: 24px;
   padding: 0 250px 0 0;
